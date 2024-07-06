@@ -23,10 +23,10 @@ pipeline {
 
                     if (params.TECHNOLOGY == 'node') {
                         dockerfile = '/workspace/Dockerfile.node'
-                        buildArgs += " --build-arg NODE_VERSION=${params.NODE_VERSION}"
+                        buildArgs = "--build-arg NODE_VERSION=${params.NODE_VERSION}"
                     } else if (params.TECHNOLOGY == 'python') {
                         dockerfile = '/workspace/Dockerfile.python'
-                        buildArgs += " --build-arg PYTHON_VERSION=${params.PYTHON_VERSION}"
+                        buildArgs = "--build-arg PYTHON_VERSION=${params.PYTHON_VERSION}"
                     }
 
                     sh """
@@ -39,7 +39,7 @@ pipeline {
                         --verbosity info \
                         --kaniko-dir /tmp \
                         --log-format json  \
-                        --build-arg NODE_VERSION=${params.NODE_VERSION} \
+                        "${buildArgs}" \
                         --label commit=${COMMIT} \
                         --label build_date=${env.BUILD_DATE} \
                         --label branch=${env.BRANCH_NAME} 
