@@ -37,7 +37,7 @@ docker build -t executor-debug:1.0.0 -f Dockerfile.kaniko --no-cache .
 
 
 
-docker run -d -p 3000:3000 poswark/kaniko-demo:1.0.4
+docker run -d -p 3000:3000 poswark/kaniko-demo:1.0.6
 
 
 docker run --rm \
