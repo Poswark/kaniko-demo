@@ -39,10 +39,10 @@ pipeline {
                         --verbosity info \
                         --kaniko-dir /tmp \
                         --log-format json  \
-                        --build-arg NODE_VERSION=${buildArgs} \
+                        --build-arg VERSION=${buildArgs} \
                         --label commit=${COMMIT} \
                         --label build_date=${env.BUILD_DATE} \
-                        --label branch=${env.BRANCH_NAME}  --cleanup
+                        --label branch=${env.BRANCH_NAME} 
                         
                     """
                 }
