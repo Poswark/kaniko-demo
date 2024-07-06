@@ -1,7 +1,7 @@
 pipeline {
     agent any
     environment {
-        COMMIT_HASH = sh(script: 'git rev-parse HEAD', returnStdout: true).trim()
+        COMMIT = sh(script: 'git rev-parse HEAD', returnStdout: true).trim()
         BUILD_DATE = sh(script: 'date -u +"%Y-%m-%dT%H:%M:%SZ"', returnStdout: true).trim()
         BRANCH_NAME = sh(script: 'git rev-parse --abbrev-ref HEAD', returnStdout: true).trim()
         IMAGE_NAME = "poswark/kaniko-demo"
@@ -23,9 +23,8 @@ pipeline {
                         --destination ${IMAGE_NAME}:${IMAGE_TAG} \
                         --verbosity info \
                         --kaniko-dir /tmp \
-                        --log-format json --label commit=value \
+                        --log-format json --label commit=${COMMIT} \
                         --build-arg NODE_VERSION=${params.NODE_VERSION} \
-                        --build-arg COMMIT_HASH=${env.COMMIT_HASH} \
                         --build-arg BUILD_DATE=${env.BUILD_DATE} \
                         --build-arg BRANCH_NAME=${env.BRANCH_NAME} \
                         
