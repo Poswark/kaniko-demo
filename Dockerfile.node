@@ -1,6 +1,6 @@
 ARG VERSION
 
-FROM node:${VERSION}-alpine
+FROM node:${VERSION}-alpine AS builder
 
 LABEL maintainer="tu_email@example.com"
 LABEL Image=kaniko
@@ -16,13 +16,22 @@ RUN npm install --production && npm cache clean --force
 
 COPY . .
 
-RUN npm run build
-RUN addgroup -S appgroup && adduser -S appuser -G appgroup
-RUN chown -R appuser:appgroup /app
-USER appuser
+# RUN npm run build
+# RUN addgroup -S appgroup && adduser -S appuser -G appgroup
+# RUN chown -R appuser:appgroup /app
+# USER appuser
+# EXPOSE 3000
 
+# CMD ["npm", "start"]
 
+FROM nginx:alpine3.19-slim
 
-EXPOSE 3000
+COPY --from=builder /app/build /usr/share/nginx/html
 
-CMD ["npm", "start"]
+#COPY nginx.conf /etc/nginx/nginx.conf
+
+# Exponer el puerto en el que Nginx servirá la aplicación
+EXPOSE 80
+
+# Ejecutar Nginx
+CMD ["nginx", "-g", "daemon off;"]
