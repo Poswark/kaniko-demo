@@ -4,8 +4,11 @@ FROM node:${NODE_VERSION}-alpine
 
 
 LABEL maintainer="tu_email@example.com"
-LABEL commit=$COMMIT_HASH
-LABEL build_date=$BUILD_DATE
+LABEL commit=${COMMIT_HASH}
+LABEL build_date=${BUILD_DATE}
+
+
+
 
 WORKDIR /app
 
