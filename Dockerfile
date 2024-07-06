@@ -6,7 +6,6 @@ ARG BRANCH_NAME
 FROM node:${NODE_VERSION}-alpine
 
 LABEL maintainer="tu_email@example.com"
-ENV commit=${COMMIT_HASH}
 LABEL build_date=${BUILD_DATE}
 LABEL branch=${BRANCH_NAME}
 
