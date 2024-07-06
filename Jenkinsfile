@@ -18,7 +18,7 @@ pipeline {
                         --context "/workspace" \
                         --dockerfile "/workspace/Dockerfile" \
                         --destination poswark/kaniko-demo:1.0.3 \
-                        --verbosity debug \
+                        --verbosity info \
                         --kaniko-dir /tmp \
                         --log-format json --label key=value \
                         --build-arg NODE_VERSION=${params.NODE_VERSION} \
@@ -28,6 +28,17 @@ pipeline {
                     """
                 }
             }
+        }
+    }
+    post {
+        success {
+            echo 'Build and push completed successfully.'
+        }
+        failure {
+            echo 'Build or push failed.'
+        }
+        always {
+            echo 'This will always run, regardless of the build result.'
         }
     }
 }
