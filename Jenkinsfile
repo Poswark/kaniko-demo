@@ -18,7 +18,7 @@ pipeline {
                         gcr.io/kaniko-project/executor:debug \
                         --context "/workspace" \
                         --dockerfile "/workspace/Dockerfile" \
-                        --destination poswark/kaniko-demo:1.0.1 --verbosity debug --kaniko-dir /tmp
+                        --destination poswark/kaniko-demo:1.0.1 --verbosity debug --kaniko-dir /tmp --no-push
                     '''
                 }
             }
