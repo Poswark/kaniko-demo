@@ -3,7 +3,7 @@ ARG NODE_VERSION
 FROM node:${NODE_VERSION}-alpine
 
 LABEL maintainer="tu_email@example.com"
-LABEL Kaniko
+LABEL Image=kaniko
 
 
 
