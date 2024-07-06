@@ -38,3 +38,18 @@ docker build -t executor-debug:1.0.0 -f Dockerfile.kaniko --no-cache .
 
 
 docker run -d -p 3000:3000 poswark/kaniko-demo:1.0.1
+
+
+docker run --rm \
+    -v `pwd`:/workspace  \
+    -e COMMIT_HASH=8381713 \
+    -e BUILD_DATE=10212 \\
+    -e NODE_VERSION=22.4.0 \
+    poswark/executor-debug:1.0.0 \
+    --context "/workspace" \
+    --dockerfile "/workspace/Dockerfile" \
+    --destination poswark/kaniko-demo:1.0.3 \
+    --verbosity debug \
+    --kaniko-dir /tmp \
+    --log-format json --label key=value \
+    --build-arg NODE_VERSION=22.4.0
