@@ -15,10 +15,12 @@ pipeline {
                         -e COMMIT_HASH=${COMMIT_HASH} \
                         -e BUILD_DATE=${BUILD_DATE} \
                         -e DOCKER_PASSWORD=${DOCKER_PASSWORD} \
-                        gcr.io/kaniko-project/executor:debug \
+                        poswark/executor-debug:1.0.0 \
                         --context "/workspace" \
                         --dockerfile "/workspace/Dockerfile" \
-                        --destination poswark/kaniko-demo:1.0.1 --verbosity info --kaniko-dir /tmp --no-push
+                        --destination poswark/kaniko-demo:1.0.2 \
+                        --verbosity info --kaniko-dir /tmp \
+                        --log-format json --label key=value
                     '''
                 }
             }
