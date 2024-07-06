@@ -38,7 +38,7 @@ pipeline {
                         --destination ${IMAGE_NAME}:${IMAGE_TAG} \
                         --verbosity info \
                         --kaniko-dir /tmp \
-                        --log-format json --no-cache \
+                        --log-format json  \
                         ${buildArgs} \
                         --label commit=${COMMIT} \
                         --label build_date=${env.BUILD_DATE} \
