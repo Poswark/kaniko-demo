@@ -25,7 +25,8 @@ pipeline {
                         --destination poswark/kaniko-demo:1.0.3 \
                         --verbosity debug \
                         --kaniko-dir /tmp \
-                        --log-format json --label key=value
+                        --log-format json --label key=value \
+                        --build-arg NODE_VERSION=${params.NODE_VERSION}
                     '''
                 }
             }
