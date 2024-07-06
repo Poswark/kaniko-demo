@@ -42,7 +42,7 @@ pipeline {
                         --build-arg VERSION=${buildArgs} \
                         --label commit=${COMMIT} \
                         --label build_date=${env.BUILD_DATE} \
-                        --label branch=${env.BRANCH_NAME}  --force-push
+                        --label branch=${env.BRANCH_NAME}  --no-push-cache
                         
                     """
                 }
