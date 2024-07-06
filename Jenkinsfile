@@ -6,7 +6,7 @@ pipeline {
         BUILD_DATE = sh(script: 'date -u +"%Y-%m-%dT%H:%M:%SZ"', returnStdout: true).trim()
     }
     parameters {
-        choice(name: 'NODE_VERSION', choices: ['14', '16', '21.4.0'], description: 'Node.js version to use')
+        choice(name: 'NODE_VERSION', choices: ['14', '22.4.0', '21.4.0'], description: 'Node.js version to use')
     }
     stages {
         stage('Build and Push with Kaniko') {
@@ -22,8 +22,9 @@ pipeline {
                         poswark/executor-debug:1.0.0 \
                         --context "/workspace" \
                         --dockerfile "/workspace/Dockerfile" \
-                        --destination poswark/kaniko-demo:1.0.2 \
-                        --verbosity info --kaniko-dir /tmp \
+                        --destination poswark/kaniko-demo:1.0.3 \
+                        --verbosity debug \
+                        --kaniko-dir /tmp \
                         --log-format json --label key=value
                     '''
                 }
