@@ -3,6 +3,8 @@ pipeline {
     environment {
         COMMIT_HASH = sh(script: 'git rev-parse --short HEAD', returnStdout: true).trim()
         BUILD_DATE = sh(script: 'date -u +"%Y-%m-%dT%H:%M:%SZ"', returnStdout: true).trim()
+        IMAGE_NAME = "poswark/kaniko-demo"
+        IMAGE_TAG = "1.0.4"
     }
     parameters {
         choice(name: 'NODE_VERSION', choices: ['14', '22.4.0', '21.4.0'], description: 'Node.js version to use')
@@ -17,7 +19,7 @@ pipeline {
                         poswark/executor-debug:1.0.0 \
                         --context "/workspace" \
                         --dockerfile "/workspace/Dockerfile" \
-                        --destination poswark/kaniko-demo:1.0.3 \
+                        --destination ${IMAGE_NAME}:${IMAGE_TAG} \ \
                         --verbosity info \
                         --kaniko-dir /tmp \
                         --log-format json --label key=value \
