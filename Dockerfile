@@ -1,4 +1,5 @@
-FROM node:alpine
+ARG NODE_VERSION=21.4.0
+FROM node:${NODE_VERSION}-slim
 
 LABEL maintainer="tu_email@example.com"
 LABEL commit=$COMMIT_HASH
