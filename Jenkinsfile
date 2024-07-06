@@ -5,7 +5,7 @@ pipeline {
         BUILD_DATE = sh(script: 'date -u +"%Y-%m-%dT%H:%M:%SZ"', returnStdout: true).trim()
         BRANCH_NAME = sh(script: 'git rev-parse --abbrev-ref HEAD', returnStdout: true).trim()
         IMAGE_NAME = "poswark/kaniko-demo"
-        IMAGE_TAG = "1.0.6"
+        IMAGE_TAG = "1.0.7"
     }
     parameters {
         //choice(name: 'NODE_VERSION', choices: ['14', '22.4.0', '21.4.0'], description: 'Node.js version to use')
