@@ -33,15 +33,4 @@ pipeline {
             }
         }
     }
-    post {
-        success {
-            echo 'Build and push completed successfully.'
-        }
-        failure {
-            echo 'Build or push failed.'
-        }
-        always {
-            echo 'This will always run, regardless of the build result.'
-        }
-    }
 }
