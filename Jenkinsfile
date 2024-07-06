@@ -11,7 +11,7 @@ pipeline {
         stage('Build and Push with Kaniko') {
             steps {
                 script {
-                    sh '''
+                    sh """
                     docker run --rm \
                         -v `pwd`:/workspace  \
                         poswark/executor-debug:1.0.0 \
@@ -21,8 +21,11 @@ pipeline {
                         --verbosity debug \
                         --kaniko-dir /tmp \
                         --log-format json --label key=value \
+                        --build-arg NODE_VERSION=${params.NODE_VERSION} \
+                        --build-arg COMMIT_HASH=${env.COMMIT_HASH} \
+                        --build-arg BUILD_DATE=${env.BUILD_DATE} \
                         
-                    '''
+                    """
                 }
             }
         }
