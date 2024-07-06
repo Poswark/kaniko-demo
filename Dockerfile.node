@@ -15,17 +15,17 @@ COPY . .
 
 RUN npm run build
 
-RUN addgroup -S appgroup && adduser -S appuser -G appgroup
-RUN chown -R appuser:appgroup /app
-USER appuser
-EXPOSE 3000
+# RUN addgroup -S appgroup && adduser -S appuser -G appgroup
+# RUN chown -R appuser:appgroup /app
+# USER appuser
+# EXPOSE 3000
 
-CMD ["npm", "start"]
+# CMD ["npm", "start"]
 
-# FROM nginx:alpine3.19-slim
+FROM nginx:alpine3.19-slim
 
-# COPY --from=builder /app/build /usr/share/nginx/html
+COPY --from=builder /app/build /usr/share/nginx/html
 
-# EXPOSE 80
+EXPOSE 80
 
-# CMD ["nginx", "-g", "daemon off;"]
+CMD ["nginx", "-g", "daemon off;"]
