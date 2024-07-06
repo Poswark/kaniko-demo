@@ -13,14 +13,6 @@ pipeline {
         string(name: 'KANIKO_IMAGE', defaultValue: 'poswark/executor-debug:1.0.0', description: 'Kaniko executor image')
     }
     stages {
-        stage('Prepare Environment') {
-            steps {
-                script {
-                    // Any preparation steps can go here
-                    echo "Using Node.js version: ${params.NODE_VERSION}"
-                }
-            }
-        }
         stage('Build and Push with Kaniko') {
             steps {
                 script {
@@ -29,14 +21,13 @@ pipeline {
                         -v `pwd`:/workspace  \
                         -e COMMIT_HASH=${COMMIT_HASH} \
                         -e BUILD_DATE=${BUILD_DATE} \
-                        -e DOCKER_PASSWORD=${DOCKER_PASSWORD} \
                         -e NODE_VERSION=${params.NODE_VERSION} \
-                        ${params.KANIKO_IMAGE} \
-                        --context "${params.BUILD_CONTEXT}" \
-                        --dockerfile "${params.DOCKERFILE_PATH}" \
-                        --destination ${IMAGE_NAME}:${IMAGE_TAG} \
+                        poswark/executor-debug:1.0.0 \
+                        --context "/workspace" \
+                        --dockerfile "/workspace/Dockerfile" \
+                        --destination poswark/kaniko-demo:1.0.2 \
                         --verbosity info --kaniko-dir /tmp \
-                        --log-format json --label commit=${COMMIT_HASH} --label build_date=${BUILD_DATE}
+                        --log-format json --label key=value
                     '''
                 }
             }
