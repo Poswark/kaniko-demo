@@ -36,13 +36,13 @@ pipeline {
                         --context "/workspace" \
                         --dockerfile "${dockerfile}" \
                         --destination ${IMAGE_NAME}:${IMAGE_TAG} \
-                        --verbosity info \
+                        --verbosity debug \
                         --kaniko-dir /tmp \
                         --log-format json  \
                         --build-arg VERSION=${buildArgs} \
                         --label commit=${COMMIT} \
                         --label build_date=${env.BUILD_DATE} \
-                        --label branch=${env.BRANCH_NAME}  --force
+                        --label branch=${env.BRANCH_NAME}  --force-push
                         
                     """
                 }
