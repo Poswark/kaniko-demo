@@ -1,7 +1,6 @@
 pipeline {
     agent any
     environment {
-        DOCKER_PASSWORD = credentials('docker-registry-password')
         COMMIT_HASH = sh(script: 'git rev-parse --short HEAD', returnStdout: true).trim()
         BUILD_DATE = sh(script: 'date -u +"%Y-%m-%dT%H:%M:%SZ"', returnStdout: true).trim()
         IMAGE_NAME = "poswark/kaniko-demo"
