@@ -39,7 +39,7 @@ pipeline {
                         --verbosity info \
                         --kaniko-dir /tmp \
                         --log-format json  \
-                        ${buildArgs} \
+                        --build-arg NODE_VERSION=${params.NODE_VERSION} \
                         --label commit=${COMMIT} \
                         --label build_date=${env.BUILD_DATE} \
                         --label branch=${env.BRANCH_NAME} 
