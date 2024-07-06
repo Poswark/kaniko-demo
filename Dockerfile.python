@@ -1,0 +1,14 @@
+
+ARG PYTHON_VERSION
+ARG COMMIT_HASH
+ARG BUILD_DATE
+ARG BRANCH_NAME
+
+FROM python:${PYTHON_VERSION}-alpine
+
+LABEL maintainer="tu_email@example.com"
+LABEL commit=${COMMIT_HASH}
+LABEL build_date=${BUILD_DATE}
+LABEL branch=${BRANCH_NAME}
+
+# Resto de tu Dockerfile
