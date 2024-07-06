@@ -1,16 +1,9 @@
 pipeline {
     agent any
     environment {
+        DOCKER_PASSWORD = credentials('docker-registry-password')
         COMMIT_HASH = sh(script: 'git rev-parse --short HEAD', returnStdout: true).trim()
         BUILD_DATE = sh(script: 'date -u +"%Y-%m-%dT%H:%M:%SZ"', returnStdout: true).trim()
-        IMAGE_NAME = "poswark/kaniko-demo"
-        IMAGE_TAG = "1.0.2"
-    }
-    parameters {
-        choice(name: 'NODE_VERSION', choices: ['14', '16', '22.4.0'], description: 'Node.js version to use')
-        string(name: 'DOCKERFILE_PATH', defaultValue: '/workspace/Dockerfile', description: 'Path to Dockerfile')
-        string(name: 'BUILD_CONTEXT', defaultValue: '/workspace', description: 'Build context')
-        string(name: 'KANIKO_IMAGE', defaultValue: 'poswark/executor-debug:1.0.0', description: 'Kaniko executor image')
     }
     stages {
         stage('Build and Push with Kaniko') {
@@ -21,7 +14,7 @@ pipeline {
                         -v `pwd`:/workspace  \
                         -e COMMIT_HASH=${COMMIT_HASH} \
                         -e BUILD_DATE=${BUILD_DATE} \
-                        -e NODE_VERSION=${params.NODE_VERSION} \
+                        -e DOCKER_PASSWORD=${DOCKER_PASSWORD} \
                         poswark/executor-debug:1.0.0 \
                         --context "/workspace" \
                         --dockerfile "/workspace/Dockerfile" \
