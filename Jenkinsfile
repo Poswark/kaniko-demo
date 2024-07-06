@@ -18,7 +18,7 @@ pipeline {
             steps {
                 script {
                     def dockerfile
-                    def buildArgs = "--build-arg COMMIT_HASH=${env.COMMIT_HASH} --build-arg BUILD_DATE=${env.BUILD_DATE} --build-arg BRANCH_NAME=${env.BRANCH_NAME}"
+                    def buildArgs = "--build-arg COMMIT_HASH=${env.COMMIT} --build-arg BUILD_DATE=${env.BUILD_DATE} --build-arg BRANCH_NAME=${env.BRANCH_NAME}"
 
                     if (params.TECHNOLOGY == 'node') {
                         dockerfile = '/workspace/Dockerfile.node'
