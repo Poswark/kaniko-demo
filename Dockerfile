@@ -1,11 +1,14 @@
-ARG NODE_VERSION=
+ARG NODE_VERSION
+ARG COMMIT_HASH
+ARG BUILD_DATE
+ARG BRANCH_NAME
+
 FROM node:${NODE_VERSION}-alpine
 
-
-
 LABEL maintainer="tu_email@example.com"
-LABEL commit=${COMMIT_HASH}
+ENV commit=${COMMIT_HASH}
 LABEL build_date=${BUILD_DATE}
+LABEL branch=${BRANCH_NAME}
 
 
 

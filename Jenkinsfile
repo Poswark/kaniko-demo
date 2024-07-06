@@ -3,8 +3,9 @@ pipeline {
     environment {
         COMMIT_HASH = sh(script: 'git rev-parse --short HEAD', returnStdout: true).trim()
         BUILD_DATE = sh(script: 'date -u +"%Y-%m-%dT%H:%M:%SZ"', returnStdout: true).trim()
+        BRANCH_NAME = sh(script: 'git rev-parse --abbrev-ref HEAD', returnStdout: true).trim()
         IMAGE_NAME = "poswark/kaniko-demo"
-        IMAGE_TAG = "1.0.4"
+        IMAGE_TAG = "1.0.5"
     }
     parameters {
         choice(name: 'NODE_VERSION', choices: ['14', '22.4.0', '21.4.0'], description: 'Node.js version to use')
@@ -26,6 +27,7 @@ pipeline {
                         --build-arg NODE_VERSION=${params.NODE_VERSION} \
                         --build-arg COMMIT_HASH=${env.COMMIT_HASH} \
                         --build-arg BUILD_DATE=${env.BUILD_DATE} \
+                        --build-arg BRANCH_NAME=${env.BRANCH_NAME} \
                         
                     """
                 }
