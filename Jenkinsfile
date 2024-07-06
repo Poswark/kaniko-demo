@@ -19,7 +19,7 @@ pipeline {
                         poswark/executor-debug:1.0.0 \
                         --context "/workspace" \
                         --dockerfile "/workspace/Dockerfile" \
-                        --destination ${IMAGE_NAME}:${IMAGE_TAG} \ \
+                        --destination ${IMAGE_NAME}:${IMAGE_TAG} \ 
                         --verbosity info \
                         --kaniko-dir /tmp \
                         --log-format json --label key=value \
