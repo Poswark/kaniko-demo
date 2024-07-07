@@ -54,4 +54,7 @@ docker run --rm \
     --log-format json --label key=value \
     --build-arg NODE_VERSION=22.4.0
 
+
+--tar-path image-1.0.tar --no-push 
+trivy image --timeout 15m --offline-scan --input kaniko-demo.tar  --severity CRITICAL
 ```
