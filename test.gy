@@ -1,0 +1,74 @@
+pipeline {
+    agent {
+        kubernetes {
+            yaml """
+apiVersion: v1
+kind: Pod
+metadata:
+  labels:
+    jenkins: kaniko
+spec:
+  serviceAccountName: demo-jenkins
+  containers:
+  - name: kaniko
+    image: gcr.io/kaniko-project/executor:debug
+    command:
+    - sh
+    - -c
+    args:
+    - cat
+    tty: true
+    resources:
+      requests:
+        cpu: "400m"
+        memory: "128Mi"
+      limits:
+        cpu: "1"
+        memory: "1024Mi"
+"""
+        }
+    }
+    stages {
+        stage('Build') {
+            steps {
+                container('kaniko') {
+                    script {
+                        echo 'Running inside Kaniko container'
+                        // Aquí puedes agregar los comandos específicos que necesitas ejecutar
+                    }
+                }
+            }
+        }
+    }
+}
+--
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: demo-jenkins
+  namespace: default
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  namespace: default
+  name: kaniko-role
+rules:
+- apiGroups: [""]
+  resources: ["pods", "pods/log"]
+  verbs: ["get", "watch", "list", "create", "delete"]
+
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: kaniko-rolebinding
+  namespace: default
+subjects:
+- kind: ServiceAccount
+  name: demo-jenkins
+  namespace: default
+roleRef:
+  kind: Role
+  name: kaniko-role
+  apiGroup: rbac.authorization.k8s.io
