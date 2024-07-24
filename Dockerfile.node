@@ -15,8 +15,9 @@ RUN npm install --production && npm cache clean --force
 COPY . .
 
 RUN npm run build
+RUN addgroup --system appgroup && \
+    adduser --system --ingroup appgroup appuser
 
-RUN addgroup -S appgroup && adduser -S appuser -G appgroup
 RUN chown -R appuser:appgroup /app
 USER appuser
 EXPOSE 3000
