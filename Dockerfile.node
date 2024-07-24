@@ -1,6 +1,7 @@
 ARG VERSION
+FROM node:22-slim AS builder
 
-FROM node:${VERSION}-alpine AS builder
+#FROM node:${VERSION}-alpine AS builder
 
 LABEL maintainer="tu_email@example.com"
 LABEL Image=kaniko
