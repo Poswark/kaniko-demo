@@ -10,10 +10,11 @@ pipeline {
                             container('kaniko') {
                                 sh '''
                                 executor \
-                                  --destination=docker.io/somerepo/kaniko-test:$(date -u +%Y-%m-%dT%H%M%S) \
-                                  --context=git://somegitrepo.com/example/sample-go-http-app.git#refs/heads/master
+                                  --context=git://github.com/Poswark/kaniko-demo.git#refs/heads/trunk \
+                                  --tar-path image.tar --no-push
                                 '''
                             }
+    
                         }
                     }
                 }
