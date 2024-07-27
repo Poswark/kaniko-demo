@@ -1,8 +1,7 @@
 # Utiliza la imagen base de Kaniko
-FROM gcr.io/kaniko-project/executor:debug
+FROM gcr.io/kaniko-project/executor:latest
 
 # Copia el archivo de configuración de Docker con las credenciales
-COPY config.json /kaniko/.docker/config.json
+COPY ca-certificates.crt /kaniko/ssl/certs/ca-certificates.crt
 
 # Ajusta permisos si es necesario
-RUN chmod 600 /kaniko/.docker/config.json

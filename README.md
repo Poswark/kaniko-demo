@@ -58,3 +58,6 @@ docker run --rm \
 --tar-path image-1.0.tar --no-push 
 trivy image --timeout 15m --offline-scan --input kaniko-demo.tar  --severity CRITICAL
 ```
+
+![My animated logo](example1.png)
+![My animated logo](example2.png)
