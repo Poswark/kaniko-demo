@@ -5,3 +5,4 @@ FROM gcr.io/kaniko-project/executor:latest
 COPY ca-certificates.crt /kaniko/ssl/certs/ca-certificates.crt
 
 # Ajusta permisos si es necesario
+COPY config.json /kaniko/.docker/config.json
