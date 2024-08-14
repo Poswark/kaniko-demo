@@ -11,7 +11,13 @@
     "react-scripts": "5.0.1",
     "web-vitals": "^2.1.4"
   },
+  "devDependencies": {
+    "@babel/preset-env": "^7.25.3",
+    "@babel/preset-react": "^7.24.7",
+    "babel-jest": "^29.0.0"
+  },
   "scripts": {
+    "check": "node --max-old-space-size=16384 ./node_modules/jest/bin/jest --config=jest.config.js --coverage --detectOpenHandles --silent --forceExit",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
